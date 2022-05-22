@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    {% load static %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Healthcare</title>
+    <link rel="stylesheet" href="{% static 'style_dash.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+  {% load static %}
+    <input type="checkbox" id="check">
+    <!--header area start-->
+    <header class="py-2 pb-5">
+      <label for="check">
+        <i class="fas fa-bars" id="sidebar_btn"></i>
+      </label>
+      <div class="left_area">
+        <h3>E-HEALTHCARE</h3>
+      </div>
+      <div class="right_area">
+        <a href="{% url 'logout' %}" class="logout_btn">Logout</a>
+      </div>
+    </header>
+    <!--header area end-->
+    <!--mobile navigation bar start-->
+    <div class="mobile_nav">
+      <div class="nav_bar">
+        <img src="{% static 'pp.jpeg' %}" class="profile_image" alt="">
+        <i class="fa fa-bars nav_btn"></i>
+      </div>
+      <div class="mobile_nav_items">
+        <a href="{% url 'adminhome' %}"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="{% url 'adminaddDoctor' %}"><i class="fas fa-plus-circle"></i><span>Add Doctor</span></a>
+        <a href="{% url 'adminviewDoctor' %}"><i class="fas fa-user-md"></i><span>View Doctors</span></a>
+        <a href="{% url 'adminviewAppointment' %}"><i class="fas fa-calendar-check"></i><span>View Appointments</span></a>
+
+      </div>
+    </div>
+    <!--mobile navigation bar end-->
+    <!--sidebar start-->
+    <div class="sidebar">
+      <div class="profile_info">
+        <img src="{% static 'pp.jpeg' %}" class="profile_image" alt="">
+        <h4 style="color:white;">ADMIN</h4>
+      </div>
+      <a href="{% url 'adminhome' %}"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="{% url 'adminaddDoctor' %}"><i class="fas fa-plus-circle"></i><span>Add Doctor</span></a>
+        <a href="{% url 'adminviewDoctor' %}"><i class="fas fa-user-md"></i><span>View Doctors</span></a>
+        <a href="{% url 'adminviewAppointment' %}"><i class="fas fa-calendar-check"></i><span>View Appointments</span></a>
+
+    </div>
+    <!--sidebar end-->
+
+    <div class="content text-center py-auto px-auto mt-5">
+        <div class="card mt-5 py-2">
+          <div class="page-content-wrapper">
+
+                <div class="row register-form">
+                    <div class="col-md-8 offset-md-2">
+                        <form class="custom-form" method="post" style="margin-top: 0px;">
+                            {% csrf_token %}
+                            <h1 style="text-align:center;margin-bottom:5px;">Add Doctor</h1>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" >Name </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" name="name">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="email-input-field" >Email </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="email" name="email">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="pawssword-input-field" >Password </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="password" name="password">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="repeat-pawssword-input-field" >Repeat Password </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="password" name="repeatpasssword">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field">Gender</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <select class="form-control" name="gender">
+                                        <optgroup label="Choose Your Gender">
+                                            <option value="Male" selected="">Male</option>
+                                            <option value="Female">Female</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" >Phone Number</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" name="phonenumber">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" >Address</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <textarea class="form-control" name="address"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" >Birth Date</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="date" name="dateofbirth">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field">Blood Group</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <select class="form-control" name="bloodgroup">
+                                        <optgroup label="Choose Blood Group">
+                                            <option value="O+" selected="">O+</option>
+                                            <option value="O-">O-</option>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field" >Your Field</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <select class="form-control" name="specialization">
+                                        <optgroup label="Choose Your Field">
+                                            <option value="Pediatrician" selected="">Pediatrician</option>
+                                            <option value="Gynecologist">Gynecologist</option>
+                                            <option value="Surgeon">Surgeon</option>
+                                            <option value="Psychiatrist">Psychiatrist</option>
+                                            <option value="Cardiologist">Cardiologist</option>
+                                            <option value="Dermatologist">Dermatologist</option>
+                                            <option value="Endocrinologist">Endocrinologist</option>
+                                            <option value="Gastroenterologist">Gastroenterologist</option>
+                                            <option value="Nephrologist">Nephrologist</option>
+                                            <option value="Ophthalmologist">Ophthalmologist</option>
+                                            <option value="Anesthesiologist">Anesthesiologist</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                        <button class="btn btn-primary submit-button" type="submit">Add Doctor</button></form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+{% ifequal error "no" %}
+<script type="text/javascript">
+    alert('Doctor saved Sucessfully..........')
+    window.location = ('{% url 'adminaddDoctor' %}')
+</script>
+{% endifequal%}
+
+{% ifequal error "yes" %}
+<script type="text/javascript">
+    alert('Error....')
+</script>
+{% endifequal%}
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('.nav_btn').click(function(){
+        $('.mobile_nav_items').toggleClass('active');
+      });
+    });
+    </script>
+
+
+  </body>
+</html>
+
+
+

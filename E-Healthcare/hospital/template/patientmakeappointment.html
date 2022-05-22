@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    {% load static %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-HEALTHCARE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style_dash.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+  {% load static %}
+    <input type="checkbox" id="check">
+    <!--header area start-->
+    <header class="py-2 pb-5">
+      <label for="check">
+        <i class="fas fa-bars" id="sidebar_btn"></i>
+      </label>
+      <div class="left_area">
+        <h3>E-HEALTHCARE</h3>
+      </div>
+      <div class="right_area">
+        <a href="{% url 'logout' %}" class="logout_btn">Logout</a>
+      </div>
+    </header>
+    <!--header area end-->
+    <!--mobile navigation bar start-->
+    <div class="mobile_nav">
+      <div class="nav_bar">
+        <img src="{% static 'pp.jpeg' %}" class="mobile_profile_image" alt="">
+        <i class="fa fa-bars nav_btn"></i>
+      </div>
+      <div class="mobile_nav_items">
+        <a href="{% url 'p_home' %}"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="{% url 'profile' %}"><i class="fas fa-user"></i><span>Profile</span></a>
+        <a href="{% url 'makeappoint' %}"><i class="fas fa-calendar-plus"></i><span>Make Appointment</span></a>
+        <a href="{% url 'viewappoint' %}"><i class="fas fa-th"></i><span>View Prescription</span></a>
+        <a href="{% url 'updateprofile' %}"><i class="fas fa-sticky-note"></i><span>Update Profile</span></a>
+      </div>
+    </div>
+    <!--mobile navigation bar end-->
+    <!--sidebar start-->
+    <div class="sidebar">
+      <div class="profile_info">
+        <img src="{% static 'pp.jpeg' %}" class="profile_image" alt="">
+        <h4 style="color:white;">USER</h4>
+      </div>
+      <a href="{% url 'p_home' %}"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="{% url 'profile' %}"><i class="fas fa-user"></i><span>Profile</span></a>
+        <a href="{% url 'makeappoint' %}"><i class="fas fa-calendar-plus"></i><span>Make Appointment</span></a>
+        <a href="{% url 'viewappoint' %}"><i class="fas fa-th"></i><span>View Prescription</span></a>
+        <a href="{% url 'updateprofile' %}"><i class="fas fa-sticky-note"></i><span>Update Profile</span></a>
+    </div>
+    <!--sidebar end-->
+
+  <div class="content text-center py-auto px-auto mt-5">
+      <div class="card mt-5 py-2">
+            <div class="page-content-wrapper">
+                <div class="container-fluid">
+                <div class="row register-form">
+                    <div class="col-md-8 offset-md-2">
+                        <form class="custom-form" method="POST">
+                            {% csrf_token %}
+                            <h1 style="margin-top: 0px;">Make Appointments</h1>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field">Doctor's Name & Field</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <select class="form-control" name="doctoremail">
+                                            {% for d in alldoctors %}
+                                            <option value="{{d.email}}">{{d.doctor_name}}----->{{d.specialization}}</option>
+                                            {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            {% for d in alldoctors %}
+                            <input type="hidden" value="{{d.doctor_name}}" name="doctorname">
+                            {% endfor %}
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column"><label class="col-form-label" for="pawssword-input-field">Name</label></div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{user.first_name}}" name="patientname">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column"><label class="col-form-label" for="pawssword-input-field">Email</label></div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" value="{{user.username}}" name="patientemail">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field">Appointment Date</label></div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="date" name="appointmentdate" required="">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field">Appointment Time</label></div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="time" placeholder="enter time" name="appointmenttime" required="">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field">Symptoms</label></div>
+                                <div class="col-sm-6 input-column">
+                                    <textarea class="form-control" name="symptoms" required=""></textarea>
+                                </div>
+                            </div>
+                        <button class="btn btn-primary submit-button" type="submit">Make Appointment</button></form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+  </div>
+   {% ifequal error "no" %}
+<script type="text/javascript">
+    alert('Appointment Booked Sucessfully..........')
+    window.location = ('{% url 'makeappoint' %}')
+</script>
+{% endifequal%}
+
+{% ifequal error "yes" %}
+<script type="text/javascript">
+    alert('{{e}}')
+    alert('Something gone wrong....')
+</script>
+{% endifequal%}
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('.nav_btn').click(function(){
+        $('.mobile_nav_items').toggleClass('active');
+      });
+    });
+    </script>
+     <script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+  </body>
+</html>
+
+
+

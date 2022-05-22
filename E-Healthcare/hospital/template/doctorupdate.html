@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    {% load static %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Healthcare</title>
+
+    <link rel="stylesheet" href="{% static 'style_dash.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+  {% load static %}
+    <input type="checkbox" id="check">
+    <!--header area start-->
+    <header class="py-2 pb-5">
+      <label for="check">
+        <i class="fas fa-bars" id="sidebar_btn"></i>
+      </label>
+      <div class="left_area">
+        <h3>E-HEALTHCARE</h3>
+      </div>
+      <div class="right_area">
+        <a href="{% url 'logout' %}" class="logout_btn">Logout</a>
+      </div>
+    </header>
+
+    <!--header area end-->
+    <!--mobile navigation bar start-->
+    <div class="mobile_nav">
+      <div class="nav_bar">
+       <img src="{% static 'static/img/1.png' %}" class="mobile_profile_image" alt="">
+        <i class="fa fa-bars nav_btn"></i>
+      </div>
+      <div class="mobile_nav_items">
+        <a href="{% url 'p_home' %}"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="{% url 'profile' %}"><i class="fas fa-user"></i><span>Profile</span></a>
+        <a href="{% url 'viewappoint' %}"><i class="fas fa-pen-nib"></i><span>Create Prescription</span></a>
+        <a href="{% url 'updateprofile' %}"><i class="fas fa-user-edit"></i><span>Update Profile</span></a>
+      </div>
+    </div>
+    <!--mobile navigation bar end-->
+    <!--sidebar start-->
+    <div class="sidebar">
+      <div class="profile_info">
+        <img src="{% static 'pp.jpeg' %}" class="profile_image" alt="">
+        <h4 style="color:white;">USER</h4>
+      </div>
+      <a class="hi" href="{% url 'p_home' %}"><i class="fas fa-home"></i><span>Home</span></a>
+        <a class="hi" href="{% url 'profile' %}"><i class="fas fa-user"></i><span>Profile</span></a>
+        <a href="{% url 'viewappoint' %}"><i class="fas fa-pen-nib"></i><span>Create Prescription</span></a>
+        <a href="{% url 'updateprofile' %}"><i class="fas fa-user-edit"></i><span>Update Profile</span></a>
+
+    </div>
+    <!--sidebar end-->
+ <div  class="content text-center py-auto px-auto mt-5">
+      <div  class="card mt-5 py-2">
+
+
+            <div class="page-content-wrapper">
+
+                <div class="row register-form">
+                    <div class="col-md-8 offset-md-2">
+          {% for d in doctor_details %}
+
+<form class="custom-form" style="margin-top: 0px;" method="post">
+     {% csrf_token %}
+                            <h1>Your Profile</h1>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field">Name </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" name="doctor_name" value="{{ d.doctor_name }}" >
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="email-input-field">Email </label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="email" name="email" value="{{ d.email }}" readonly="">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="dropdown-input-field">Gender</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" name="gender" value="{{ d.gender }}" readonly="">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field">Mobile</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" name="mobile" value="{{ d.mobile }}" >
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field">Address</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <textarea class="form-control" name="address">{{ d.address }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field">Birth Date</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input class="form-control" type="text" name="Dob" value="{{ d.DOB }}">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="col-sm-4 label-column">
+                                    <label class="col-form-label" for="name-input-field">Blood Group</label>
+                                </div>
+                                <div class="col-sm-6 input-column">
+                                    <input type="text" class="form-control" name="bloodGroup" value="{{ d.bloodGroup }}" >
+                                </div>
+                            </div>
+    <button class="btn btn-primary submit-button" type="submit">Update Profile</button>
+                        </form>
+{% endfor %}
+</div>
+                </div>
+            </div>
+        </div>
+
+      </div>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('.nav_btn').click(function(){
+        $('.mobile_nav_items').toggleClass('active');
+      });
+    });
+    </script>
+  {% ifequal error "no" %}
+<script type="text/javascript">
+    alert('Updated Sucessfully..........')
+    window.location = ('{% url 'p_home' %}')
+</script>
+{% endifequal%}
+
+  </body>
+</html>
+
+
+
